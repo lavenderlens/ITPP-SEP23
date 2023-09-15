@@ -31,13 +31,15 @@ counter = 0
 while counter < len(band):
     # counter is a dynamic variable and changes with each iteration
     print(band[counter])
-    counter += 1  # very important to increment/decrement counter here
-# print("while loop with decrement")#TODO fix
-# counter2 = len(band)
-# while counter2 < 0:
-#     # counter2 is a dynamic variable and changes with each iteration
-#     print(band[counter2 - 1])
-#     counter2 -= 1  # very important to increment/decrement counter2 here
+    counter += 1  # very important to increment counter here
+
+print("while loop with decrement")  # TODO fix
+counter2 = len(band) - 1    # CARE index position len(band) is out of bounds
+while counter2 > 0:         # CARE direction of sign - I missed this in class live demo
+    # counter2 is a dynamic variable and changes with each iteration
+    print(band[counter2])
+    counter2 -= 1  # very important to decrement counter2 here
+print("decrement puts counter back to zero")
 
 # while loop with break
 print("using while loop with break")
@@ -47,6 +49,7 @@ while counter3 < len(band):
         break
     print(band[counter3])
     counter3 += 1
+
 # while loop with continue - skips one iteration only
 print("using while loop with continue")
 counter4 = 0
