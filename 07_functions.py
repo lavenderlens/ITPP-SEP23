@@ -10,6 +10,7 @@
 # a function should be idempotent - it should give the same result for multiple calls
 # it won't do this if it has an external dependency
 
+import copy
 my_name = "alan"  # external dependency
 # define function
 # impure function - has external dep
@@ -127,3 +128,48 @@ def greet4(name):
 
 
 greet4("Peter")
+
+
+###################
+# COPYING IN PYTHON
+###################
+
+my_list = [1, 2, 3]
+
+# SHALLOW copying copies reference only
+# DEEP copying copies contents and breaks reference to the original
+
+# shallow copy of reference only
+my_list_copy = my_list
+# are these truly independent
+# or does one still maintain a ref to the other?
+print(my_list_copy)
+print(my_list)
+my_list_copy.append(4)
+print(my_list_copy)
+print(my_list)  # original affected through the new ref
+
+# shallow copy using copy()
+my_list = [1, 2, 3]  # reset
+my_list_copy = copy.copy(my_list)
+my_list_copy.append(4)
+print(my_list_copy)
+print(my_list)  # original unchanged
+
+my_recursive_list = [1, 2, 3, [4, 5, 6]]
+my_recursive_list_copy = copy.copy(my_recursive_list)
+my_recursive_list_copy.append(4)
+print(my_recursive_list_copy)
+print(my_recursive_list)  # original unchanged
+
+my_recursive_list_recursive_copy = copy.copy(my_recursive_list)
+my_recursive_list_recursive_copy[3].append(7)
+print(my_recursive_list_recursive_copy)  # [1, 2, 3, [4, 5, 6, 7]]
+print(my_recursive_list)  # [1, 2, 3, [4, 5, 6, 7]] - original changed
+
+# deep copying using copy.deepcopy()
+my_recursive_list = [1, 2, 3, [4, 5, 6]]  # reset
+my_recursive_list_recursive_copy = copy.deepcopy(my_recursive_list)
+my_recursive_list_recursive_copy[3].append(7)
+print(my_recursive_list_recursive_copy)  # [1, 2, 3, [4, 5, 6, 7]]
+print(my_recursive_list)  # [1, 2, 3, [4, 5, 6]]
